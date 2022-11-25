@@ -19,3 +19,45 @@ PM > Install-Package DotNetProjectParser -Version 1.0.0
 
 ## Free resources attribution
 Icon by https://www.flaticon.com/authors/flat-icons from https://www.flaticon.com/
+
+
+
+
+
+
+
+
+
+# bug
+
+> DotNetParse 解析 framework版本信息时
+>
+> 如果 <TargetFrameworkVersion> 不是以 v4.8开头将会导致解析错误
+
+![image-20221125181052222](README.assets/image-20221125181052222.png)
+
+
+
+
+
+> System.Xml.Linq.Xelement
+>
+> 解析framework的  csproj  
+>
+> <TargetFrameworkVersion> 全称是
+>
+> <TargetFrameworkVersion xmlns="http://schemas.microsoft.com/developer/msbuild/2003">4.8</TargetFrameworkVersion>
+>
+> 对于.NET项目  版本element是   TargetFramework
+
+
+
+> 经过测试  VS csproj文件   TargetFrameworkVersion   没有“v4.8" 是可以编译成功的，
+>
+> 因此这里对DotNetProjectParser做个修复
+>
+> NetFrameworkProjectReader.cs
+
+
+
+![image-20221125195748027](README.assets/image-20221125195748027.png)

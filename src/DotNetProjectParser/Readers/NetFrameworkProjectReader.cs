@@ -73,6 +73,15 @@ namespace DotNetProjectParser.Readers
                 project.AssemblyName = propertiesSection.GetByLocalName(XmlNames.AssemblyName)?.Value;
                 project.OutputType = propertiesSection.GetByLocalName(XmlNames.OutputType)?.Value;
                 project.TargetFramework = propertiesSection.GetByLocalName(XmlNames.TargetFrameworkVersion)?.Value;
+                if(String.IsNullOrEmpty(project.TargetFramework))
+                {
+                    project.TargetFramework = propertiesSection.GetByLocalName(XmlNames.TargetFrameworkVersion).Value;
+                }
+                // check framework version
+                if(!project.TargetFramework.StartsWith("v",StringComparison.OrdinalIgnoreCase))
+                {
+                    project.TargetFramework = "v" + project.TargetFramework;
+                }
             }
 
             SetExtension(project);
